@@ -1,7 +1,7 @@
 PYTHON ?= python
 RUN ?= runs/baseline_tfidf_lr
 
-.PHONY: setup test data eda splits baseline thresholds templates audit
+.PHONY: setup test data eda splits preprocess baseline thresholds templates audit
 
 setup:
 	$(PYTHON) -m pip install -e .
@@ -18,6 +18,9 @@ eda:
 
 splits:
 	$(PYTHON) scripts/03_make_splits.py --subset 30000
+
+preprocess:
+	$(PYTHON) scripts/03b_preprocess.py --meta
 
 baseline:
 	$(PYTHON) scripts/04_train_baseline.py --out $(RUN)
